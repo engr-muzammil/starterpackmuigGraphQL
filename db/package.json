@@ -1,0 +1,60 @@
+{
+  "name": "db",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Kriasoft (https://github.com/kriasoft)",
+  "types": "types.d.ts",
+  "scripts": {
+    "version": "knex migrate:currentVersion",
+    "change": "knex migrate:make",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "reset": "node ./scripts/reset",
+    "backup": "node ./scripts/backup",
+    "import-seeds": "node ./scripts/import-seeds",
+    "restore": "node ./scripts/restore",
+    "update-types": "node ./scripts/update-types",
+    "repl": "node --experimental-repl-await ./scripts/repl",
+    "psql": "node ./scripts/psql",
+    "db:version": "yarn workspace db version",
+    "db:change": "yarn workspace db change",
+    "db:migrate": "yarn workspace db migrate",
+    "db:rollback": "yarn workspace db rollback",
+    "db:seed": "yarn workspace db seed",
+    "db:reset": "yarn workspace db reset",
+    "db:backup": "yarn workspace db backup",
+    "db:import-seeds": "yarn workspace db import-seeds",
+    "db:restore": "yarn workspace db restore",
+    "db:update-types": "yarn workspace db update-types",
+    "db:repl": "yarn workspace db repl",
+    "db:psql": "yarn workspace db psql"
+  },
+  "dependencies": {
+    "cross-spawn": "^7.0.3",
+    "env": "workspace:*",
+    "faker": "^5.5.3",
+    "knex": "^0.95.4",
+    "lodash": "^4.17.21",
+    "minimist": "^1.2.5",
+    "nanoid": "^3.1.22",
+    "pg": "^8.5.1",
+    "prettier": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.168"
+  },
+  "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "types.d.ts"
+        ],
+        "rules": {
+          "@typescript-eslint/no-explicit-any": "off"
+        }
+      }
+    ]
+  }
+}

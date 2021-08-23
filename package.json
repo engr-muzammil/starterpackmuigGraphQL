@@ -1,0 +1,63 @@
+{
+  "name": "app",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Kriasoft (https://github.com/kriasoft)",
+  "workspaces": [
+    "api",
+    "db",
+    "env",
+    "img",
+    "scripts",
+    "web"
+  ],
+  "scripts": {
+    "setup": "node ./setup",
+    "start": "yarn workspaces foreach -ip run start",
+    "build": "yarn workspaces foreach -p run build",
+    "lint": "eslint --cache --report-unused-disable-directives .",
+    "test": "jest",
+    "g:lint": "yarn lint \"$INIT_CWD\"",
+    "g:test": "yarn test \"$INIT_CWD\"",
+    "postinstall": "husky install"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.15",
+    "@babel/node": "^7.13.13",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.13.8",
+    "@babel/plugin-transform-runtime": "^7.13.15",
+    "@babel/preset-env": "^7.13.15",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0",
+    "@babel/register": "^7.13.14",
+    "@emotion/babel-plugin": "^11.3.0",
+    "@emotion/eslint-plugin": "^11.2.0",
+    "@emotion/react": "^11.1.5",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "babel-jest": "^26.6.3",
+    "cross-spawn": "^7.0.3",
+    "dotenv": "^8.2.0",
+    "env": "workspace:*",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "inquirer": "^8.0.0",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "typescript": "^4.2.4"
+  },
+  "devDependencies": {
+    "@jest/types": "^26.6.2",
+    "@types/inquirer": "^7.3.1",
+    "@types/node": "^14.14.37",
+    "@types/prettier": "^2.2.3",
+    "@yarnpkg/pnpify": "2.4.0",
+    "husky": "^6.0.0"
+  }
+}

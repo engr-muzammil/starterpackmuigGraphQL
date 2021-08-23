@@ -1,0 +1,147 @@
+schema {
+  query: Root
+  mutation: Mutation
+}
+
+# The top-level API
+type Root {
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+
+  # Fetches objects given their IDs
+  nodes(
+    # The IDs of objects
+    ids: [ID!]!
+  ): [Node]!
+  me: User
+  user(username: String!): User
+  users(after: String, first: Int): UserConnection
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object.
+  id: ID!
+}
+
+type User implements Node {
+  # The ID of an object
+  id: ID!
+  username: String!
+  email: String
+  emailVerified: Boolean
+  name: String
+  picture: String
+  givenName: String
+  familyName: String
+  timeZone: String
+  locale: String
+  admin: Boolean
+  blocked: Boolean
+  identities: [Identity!]
+  createdAt(format: String): String
+  updatedAt(format: String): String
+  lastLogin(format: String): String
+}
+
+type Identity {
+  # The ID of an object
+  id: ID!
+  provider: IdentityProvider!
+  username: String
+  email: String
+  emailVerified: Boolean
+  name: String
+  picture: String
+  givenName: String
+  familyName: String
+  locale: String
+  scopes: [String!]!
+  tokenType: String
+  createdAt(format: String): String
+  updatedAt(format: String): String
+  issuedAt(format: String): String
+  expiresAt(format: String): String
+}
+
+enum IdentityProvider {
+  google
+  apple
+  facebook
+  github
+  linkedin
+  microsoft
+  twitter
+  yahoo
+  gamecenter
+  playgames
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+  totalCount: Int!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge
+  node: User
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+type Mutation {
+  # Authenticates user with an ID token or email and password.
+  signIn(idToken: String, email: String, password: String): SignInPayload
+
+  # Removes the authentication cookie.
+  signOut: String
+
+  # Updates the user account.
+  updateUser(
+    input: UpdateUserInput
+    dryRun: Boolean! = false
+  ): UpdateUserPayload
+}
+
+type SignInPayload {
+  me: User
+}
+
+type UpdateUserPayload {
+  user: User
+}
+
+input UpdateUserInput {
+  id: ID!
+  username: String
+  email: String
+  name: String
+  picture: String
+  timeZone: String
+  locale: String
+}

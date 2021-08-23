@@ -1,0 +1,18 @@
+# Compiled output
+/**/__generated__
+/.cache/
+/dist/
+
+# Yarn
+.yarn/cache
+.yarn/plugins/*/**
+.yarn/releases
+.yarn/sdks
+.yarn/unplugged
+.yarn/*.*
+.pnp.js
+
+# Misc
+.husky
+*.hbs
+/tsconfig.json
